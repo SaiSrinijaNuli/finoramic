@@ -1,0 +1,35 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public ArrayList<ArrayList<Integer>> anagrams(final List<String> A) {
+        List<String> B = new ArrayList<String>();
+        for(int i=0;i<A.size();i++)
+        {
+            char arr[]=A.get(i).toCharArray();
+            Arrays.sort(arr);
+            B.add(i,new String(arr));
+        }
+        HashMap<String,ArrayList<Integer>> hm = new HashMap<String,ArrayList<Integer>>();
+        for(int i=0;i<B.size();i++)
+        {
+           if(hm.get(B.get(i))!=null)
+           {
+               ArrayList<Integer> a = hm.get(B.get(i));
+               a.add(i+1);
+           }
+           else
+           {
+               ArrayList<Integer> a = new ArrayList<Integer>();
+               a.add(i+1);
+               hm.put(B.get(i),a);
+           }
+        }
+        ArrayList<ArrayList<Integer>> al = new ArrayList<ArrayList<Integer>>();
+        Set<String> s = hm.keySet();
+        Iterator<String> itr = s.iterator();
+        while(itr.hasNext())
+        {
+            al.add(hm.get(itr.next()));
+        }
+        return al;
+    }
+}
